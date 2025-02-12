@@ -13,11 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 library(anndata)
 library(scry)
 library(SingleCellExperiment)
+library(fs)
+
 ```
 
 
 ```{r}
-path_normalized_data<- "/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/normalized_data/adata_concat.h5ad"
+path_normalized_data<- "G:/Data processing pipeline 0.1 Yohan/scRNA/Output/normalized_data/adata_normalizedlayers.h5ad"
 adata <- read_h5ad(path_normalized_data)
 
 ```
@@ -44,9 +46,18 @@ mask[idx] <- TRUE
 adata$var$highly_deviant <- mask
 adata$var$binomial_deviance <- binomial_deviance
 ```
+
 ```{r}
-dir_create("/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/Highly_var", recurse = TRUE)
-write_h5ad(adata, "/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/Highly_var", paste0("adata_higly_var.h5ad"))
+adata$var
+```
+
+
+
+
+```{r}
+dir_create("G:/Data processing pipeline 0.1 Yohan/scRNA/Output/Highly_var", recurse = TRUE)
+
+write_h5ad(adata, filename = "G:/Data processing pipeline 0.1 Yohan/scRNA/Output/Highly_var/adata_highly_var.h5ad")
 ```
 
 
