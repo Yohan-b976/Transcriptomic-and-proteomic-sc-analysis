@@ -1,0 +1,78 @@
+---
+title: "sc RNA R"
+output: html_document
+date: "2025-02-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+library(anndata)
+library(Seurat)
+library(scater)
+library(scDblFinder)
+library(BiocParallel)
+```
+```{r}
+path_filtered_files_h5ad <- "/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/qc_data"
+h5ad_files <- list.files(path = path_filtered_files_h5ad, pattern = "\\.h5ad$", full.names = TRUE)
+
+adatas <- list()
+for (file in h5ad_files) {
+  adatas[[basename(file)]] <- read_h5ad(file)
+}
+
+```
+
+
+```{r}
+adatas
+
+```
+
+
+
+
+```{r}
+for (file in adatas) {
+  set.seed(123)
+sce = scDblFinder(
+    SingleCellExperiment(
+        list(counts=t(file$X)),
+    ) 
+)
+doublet_score = sce$scDblFinder.score
+doublet_class = sce$scDblFinder.class
+
+
+file$obs$doublet_score <- doublet_score
+file$obs$doublet_class <- doublet_class
+}
+```
+
+
+```{r}
+library(fs)
+```
+
+```{r}
+dir_create("/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/scDbFinder_dataR", recurse = TRUE)
+
+for (ad in adatas) {
+  unique_id <- ad$obs$Id[1]
+  file_path <- path("/home/ybeaumatin/Documents/Data processing pipeline/scRNA/Output/scDbFinder_dataR", paste0("adata_", unique_id, ".h5ad"))
+  write_h5ad(ad, file_path)
+  cat("Saved:", file_path, "\n")
+}
+```
+
+
+
+
+
+
+
