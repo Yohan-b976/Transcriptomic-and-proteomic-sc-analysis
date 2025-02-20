@@ -1,0 +1,82 @@
+---
+title: "Highly var gene R"
+output: html_document
+date: "2025-02-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(anndata)
+library(scry)
+library(SingleCellExperiment)
+library(fs)
+
+```
+
+
+```{r}
+path_normalized_data<- "G:/Data processing pipeline 0.1 Yohan/scRNA/Output/normalized_data/adata_normalizedlayers.h5ad"
+adata <- read_h5ad(path_normalized_data)
+
+```
+
+```{r}
+adata
+```
+
+```{r}
+ad <- SingleCellExperiment(assays = list(counts = t(adata$X)))
+sce <- devianceFeatureSelection(ad)
+binomial_deviance <- rowData(sce)$binomial_deviance
+```
+
+
+
+```{r}
+
+idx <- order(binomial_deviance, decreasing = TRUE)[1:4000]
+
+mask <- logical(length(adata$var_names))
+mask[idx] <- TRUE
+
+adata$var$highly_deviant <- mask
+adata$var$binomial_deviance <- binomial_deviance
+```
+
+```{r}
+adata$var
+```
+
+
+
+
+```{r}
+dir_create("G:/Data processing pipeline 0.1 Yohan/scRNA/Output/Highly_var", recurse = TRUE)
+
+write_h5ad(adata, filename = "G:/Data processing pipeline 0.1 Yohan/scRNA/Output/Highly_var/adata_highly_var.h5ad")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
