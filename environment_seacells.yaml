@@ -6,7 +6,7 @@ dependencies:
     - python=3.10
     - cython
     - ipython
-    - scanpy=1.8.2
+    - scanpy
     - loompy=3.0.6
     - python-igraph
     - louvain>=0.6,!=0.6.2
