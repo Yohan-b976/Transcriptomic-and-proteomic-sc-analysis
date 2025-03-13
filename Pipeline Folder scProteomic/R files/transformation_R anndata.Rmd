@@ -1,0 +1,131 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-03-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(anndata)
+library(Seurat)
+library(scater)
+library(scDblFinder)
+library(BiocParallel)
+```
+
+
+
+```{r}
+path_filtered_files_h5ad <- "/home/ybeaumatin/Documents/Data processing pipeline/scP/Output/Formated_data"
+h5ad_files <- list.files(path = path_filtered_files_h5ad, pattern = "\\.h5ad$", full.names = TRUE)
+
+```
+
+
+```{r}
+print(h5ad_files)
+```
+
+
+```{r}
+adatas <- list()
+for (file in h5ad_files) {
+  adatas[[basename(file)]] <- read_h5ad(file)
+}
+```
+
+
+```{r}
+adatas
+```
+
+```{r}
+h5ad_files <- list.files(path = "/home/ybeaumatin/Documents/Data processing pipeline/scP/Output/Formated_data",
+                         pattern = "\\.h5ad$", full.names = TRUE)
+
+convert_to_sce <- function(file) {
+  adata <- read_h5ad(file)
+  
+  counts_matrix <- as(t(adata$X), "Matrix")  
+  col_data <- as.data.frame(adata$obs)  
+  row_data <- as.data.frame(adata$var) 
+  
+  sce <- SingleCellExperiment(
+    assays = list(counts = counts_matrix),
+    colData = col_data,
+    rowData = row_data
+  )
+  
+  return(sce)
+}
+
+sce_list <- lapply(h5ad_files, convert_to_sce)
+
+sce_list
+```
+
+
+```{r}
+library(Prostar)
+```
+
+
+```{r}
+Prostar()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
