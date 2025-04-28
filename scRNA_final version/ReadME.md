@@ -1,18 +1,27 @@
-# sc RNA seq pipeline
-This pipeline was built during a 4 months internship in the MVD in IRIm under the supervision of Willy Lutz.This can be considered as my first work and I am happy to show you the result of my work.
-## Goal of this pipeline:
-This pipeline is meant to process single cell RNA seq data using different programms and methods. It is composed of 5 files in python and 1 file in R.
-Jupyter notebook files (python):
--Pipeline_QC 0.3
--Prediction&Integration v0.3
--Annotation&mapping
--SEACells_meta 0.2
--DEG 0.2
+# scRNA-seq Pipeline
 
-R file:
--QC R (used for scDblFinder)
+This pipeline was built during a 4-month internship in the MVD team at IRIM, under the supervision of Willy Lutz.  
+This can be considered as my first major project, and I am happy to present the result of my work.
 
-This pipeline was done using nasal mucosa data infected or not by Hcov229E. With some modification it can be used on any dataset of scRNA-seq.
+## Goal of this pipeline
+
+This pipeline is designed to process single-cell RNA-seq data using different programs and methods.  
+It is composed of 5 Python files (Jupyter Notebooks) and 1 R file.
+
+**Jupyter Notebook files (Python):**  
+- Pipeline_QC v0.3  
+- Prediction_Integration v0.3  
+- Annotation_Mapping  
+- SEACells_Meta v0.2  
+- DEG v0.2  
+
+**R file:**  
+- QC_R (used for scDblFinder)
+
+---
+
+This pipeline was developed using nasal mucosa data infected or not by HCoV-229E.  
+With some modifications, it can be adapted to process any scRNA-seq dataset.
 
 # Contact:
 Email: yohanbeaumatin@gmail.com
