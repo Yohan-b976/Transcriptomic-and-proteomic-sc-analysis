@@ -11,7 +11,8 @@ It is composed of 3 Python files (Jupyter Notebooks).
 **Jupyter Notebook files (Python):**  
 - scProteomic_data_preparation  
 - Cell type assignation 0.4
-- Mapping & Annotations 0.3  
+- Mapping & Annotations 0.3
+- test sur int et normalisation  
 
 
 ## Getting started:  
@@ -21,13 +22,11 @@ This step is done using :
   * scProteomic_data_preparation   
 - **Prediction and annotations**: Do predictions of the cell types and annotate the maps accordingly. 
 This step is done using:  
-  * Prediction_Integration v0.3  
-  * Annotation_Mapping  
-- **Metacell and differential expression**: Create metacells based on SEACells software and do the DEGs for each cell type. 
+  * Mapping & Annotations 0.3 
+- **Test and tries**: Test of differents parameters and programms to look at the impact on the data. 
 This step is done using:
-  - SEACells_Meta v0.2
-  - DEG v0.2  
-
+  - Cell type assignation 0.4  
+  - test sur int et normalisation  
 
 
 ---
